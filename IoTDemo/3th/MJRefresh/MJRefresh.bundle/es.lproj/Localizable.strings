@@ -1,0 +1,17 @@
+
+"MJRefreshHeaderIdleText" = "Deslice hacia abajo para refrescar";
+"MJRefreshHeaderPullingText" = "Libere para refrescar";
+"MJRefreshHeaderRefreshingText" = "Cargando...";
+
+"MJRefreshAutoFooterIdleText" = "Toque o deslice hacia arriba para cargar más";
+"MJRefreshAutoFooterRefreshingText" = "Cargando...";
+"MJRefreshAutoFooterNoMoreDataText" = "No más datos";
+
+"MJRefreshBackFooterIdleText" = "Deslice hacia arriba para cargar más";
+"MJRefreshBackFooterPullingText" = "Liberar para cargar más.";
+"MJRefreshBackFooterRefreshingText" = "Cargando...";
+"MJRefreshBackFooterNoMoreDataText" = "No más datos";
+
+"MJRefreshHeaderLastTimeText" = "Última actualización:";
+"MJRefreshHeaderDateTodayText" = "Hoy";
+"MJRefreshHeaderNoneLastDateText" = "Sin registro";

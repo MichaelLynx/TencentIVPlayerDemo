@@ -1,0 +1,201 @@
+//
+//  PrefixHeader.pch
+//  IoTDemo
+//
+//  Created by lynx on 7/12/2020.
+//  Copyright © 2020 lynx. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "Localisator.h"
+#import "GGGraphics.h"
+
+#import "BasicConfiguration.h"
+
+//工具头文件
+#import <Masonry/Masonry.h>
+#import "BRDatePickerView.h"
+
+#import "MSizeHelper.h"
+#import "NSData+AES256.h"
+#import "NSDictionary+AES256.h"
+#import "NSDictionary+Handle.h"
+#import "UIImage+ChangeColor.h"
+
+//常用方法
+#import "Stockpile.h"
+
+#pragma mark - 自定义宏
+
+//IN_CHINA 开启为1，表示国内环境，推送为极光推送，地图为百度地图；关闭为0，推送为Firebase，地图为谷歌地图
+#define IN_CHINA 1
+//工作台样式，默认为1，代表方块样式；当为0时，为全列表样式。
+#define WORKSPACE_TYPE 1
+//主题色，更改部分文字、按钮及图标的颜色。
+#define DEFAULTMAINCOLOR DEFAULTGREENCOLOR
+
+//弱引用
+#define WEAKSELF typeof(self) __weak weakSelf = self;
+
+//判断是否是 RTL布局
+#define isRTL ([UIView appearance].semanticContentAttribute == UISemanticContentAttributeForceRightToLeft)
+
+//默认用户图标
+#define avatarPlaceholderImage ([UIImage imageNamed:@"avatar"])
+
+#pragma mark - 标准
+
+#define WIDTH_SCREEN [UIScreen mainScreen].bounds.size.width
+#define HEIGHT_SCREEN [UIScreen mainScreen].bounds.size.height
+
+#pragma mark Color
+//颜色
+//#define RGB(a, b, c) [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:1.0f]
+#define MRGBA(a, b, c ,d) [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:d * 1.0f]
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define DEFAULTGREENCOLOR RGB(122, 193, 67)
+#define DEFAULTORANGECOLOR RGB(255, 147, 0)
+#define DEFAULTBGGRAYCOLOR RGB(245, 245, 245)
+#define DEFAULTBTNCOLOR RGB(158, 158, 158)
+///更加浅灰色的文字色调
+#define DEFAULTSUBTITLEGRAYCOLOR RGB(153, 153, 153)
+///首页work界面的背景色调
+#define DEFAULTlIGHTGRAYCOLOR RGB(250, 251, 252)
+///section的色调
+#define DEFAULTSECTIONTITLECOLOR RGB(102, 102, 102)
+#define DEFAULTTITLEBLACKCOLOR RGB(51, 51, 51)
+///主标题下描述文本灰色字体
+#define DEFAULTDESCRIPTIONGRAYCOLOR RGB(204, 204, 204)
+///分隔线颜色
+#define DEFAULTLINEGRAYCOLOR RGB(230, 233, 235)
+///两边留空的分隔线颜色
+#define DEFAULTDIVIDELINECOLOR RGB(219, 219, 219)
+///默认红色字体
+#define DEFAULTREDCOLOR RGB(255, 59, 48)
+
+#pragma mark - 文本
+//Userdefault-user's selected location when checks in.
+#define SELECTEDLOCATIONINDEX @"locattion_selectedModelIndex"
+//last url info array with request type and url.
+#define LASTURLARRAY @"last_url_array"
+//JPush Registration ID
+#define JPUSH_REGISTRATION_ID @"jpushRegistrationID"
+
+#pragma mark - 枚举
+
+///work下的功能菜单类型
+typedef NS_ENUM(NSInteger, MWorkType) {
+    MWorkTypeUndefine,
+    MWorkTypeAttendance,
+    MWorkTypeAccesscontrol,
+    MWorkTypeVisitor,
+    MWorkTypeVideo,
+    MWorkTypeDevice,
+    MWorkTypeHealth
+};
+
+///abiz030101
+typedef NS_ENUM(NSInteger, MWorkDetailType) {
+    //Attendance
+    MAttendanceTypeTimesheet = 30101,
+    MAttendanceTypeMyStats = 30102,             //Used overview.
+    MAttendanceTypeMyRequest = 30103,
+    MAttendanceTypeApproval = 30104,
+    MAttendanceTypeTeamStatistics = 30105,      //Used dashboard.
+    MAttendanceTypeMyWork,
+    MAttendanceTypeMyTeam,
+    
+    //Access Control
+    MAccessTypeRemoteUnlock = 30201,
+    MAccessTypeAccessLevels = 30202,
+    MAccessTypeReports = 30203,
+    MAccessTypeAlertSettings = 30204,
+    
+    //Visitor
+    MVisitorTypeInvite = 30301,
+    MVisitorTypeHistory = 30302,
+    MVisitorTypeVisitor = 30303,
+    MVisitorTypeLogbook = 30304,
+    MVisitorTypeCheckIn = 30305,
+    MVisitorTypeScanQRCode = 30306,
+    MVisitorTypeHealthSetting = 30307,
+    
+    //Device
+    MDeviceTypeDevice = 30400,
+    
+    //Health
+    MHealthTypeEmployeeHealth = 30601,
+    MHealthTypeVisitorHealth = 30602,
+    MHealthTypeSetting = 30603,
+};
+
+///Me的功能类型
+typedef NS_ENUM(NSInteger, MMeType) {
+    MMeTypeAbout,
+    MMeTypeSetting
+};
+
+///Me-Setting
+typedef NS_ENUM(NSInteger, MSettingType) {
+    MSettingTypeLanguage = 0,
+    MSettingTypeDateFormat = 1,
+    MSettingTypeTimeFormat = 2,
+    MSettingTypeMSGSetting = 3
+};
+
+///用户个人信息
+typedef NS_ENUM(NSInteger, MPInfoType) {
+    MPInfoTypeHeader = 0,
+    MPInfoTypeGender,
+    MPInfoTypeBirthDate,
+    MPInfoTypeSSN,
+    MPInfoTypeDepartment,
+    MPInfoTypeEmployeeID,
+    MPInfoTypePosition,
+    MPInfoTypeHiredDate,
+    MPInfoTypeMobile,
+    MPInfoTypePhone,
+    MPInfoTypeEmail
+};
+
+//My Request/Approvals.
+typedef NS_ENUM(NSInteger, MRequestType) {
+    MRequestTypeMRPending,      //My Request-Pending
+    MRequestTypeMRProcessed,    //My Request-Processed
+    MRequestTypeAPPending,      //Approvals-Pending
+    MRequestTypeAPHistory       ////Approvals-History
+};
+
+//Message List Type
+typedef NS_ENUM(NSInteger, MMessageType) {
+    MMessageTypeNotification = 101,
+    MMessageTypePending = 102
+};
+
+//Device detail Type
+typedef NS_ENUM(NSInteger, MDeviceDetailType) {
+    MDeviceDetailTypeHeader,
+    MDeviceDetailTypeName,
+    MDeviceDetailTypeBoundUsers,    //Device Person
+    MDeviceDetailTypeAdmin,         //Device Administrator
+    MDeviceDetailTypeStatus,
+    MDeviceDetailTypeNotification,  //Hiden for non-use.
+    MDeviceDetailTypeEnroll,
+};
+
+//Dashboard timecard type.
+typedef NS_ENUM(NSInteger, MTimeCardType) {
+    MTimeCardTypeRegular,
+    MTimeCardTypeOvertime,
+    MTimeCardTypeLeave
+};
+
+
+#endif
+
+#endif /* PrefixHeader_pch */
